@@ -1,0 +1,39 @@
+
+<div class="ui grid">
+  <div class="ten wide column">
+    <div class="ui segment">
+      <div *ngIf="!user.email" class="ui active inverted dimmer">
+        <div class="ui text loader">Loading...</div>
+      </div>
+      <h3 class="name" *ngIf="user.displayName">{{ user.displayName }}</h3>
+      <h4 class="email">{{ user.email }}</h4>
+      <div *ngIf="user.bio; else noBio">
+        <p>{{ user.bio }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="six wide column">
+    <div class="ui segment">
+      <div *ngIf="!user.skills" class="ui active inverted dimmer">
+        <div class="ui text loader">Loading...</div>
+      </div>
+      <h4>Skills / Knowledge</h4>
+      <ul *ngIf="user.skills" class="skills">
+        <li *ngFor="let skill of user.skills">{{ skill }}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<ng-template #noBio>
+  User has not set their bio...
+</ng-template>
+
+<!-- 
+
+  onClick -> goto user profile from team-details, different ids
+  .index rules sorted
+  bug testing
+  try all possibilities and routes
+
+ -->

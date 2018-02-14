@@ -1,0 +1,11 @@
+ul.inbox {
+    margin: 0;
+    padding: 0;
+    list-style:none;
+}
+ul.inbox li {
+    margin-bottom: 1em;
+}
+ul.inbox li:last-of-type {
+    margin-bottom: 0em;
+}

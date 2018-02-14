@@ -1,0 +1,11 @@
+ul.myteams {
+    margin: 0;
+    padding: 0;
+    list-style:none;
+}
+ul.myteams li {
+    margin-bottom: 1em;
+}
+ul.myteams li:last-of-type {
+    margin-bottom: 0em;
+}

@@ -1,0 +1,21 @@
+<div class="ui one column stackable grid container">
+    
+  <div class="column" style="padding: 1em 0.5em;">
+    <div class="ui segment">
+      <div class="ui items">
+        <div class="item">
+          <a class="ui tiny image" [routerLink]="['/profile/'+team.author_key]">
+            <img src="https://semantic-ui.com/images/avatar/large/justen.jpg">
+          </a>
+          <div class="content">
+            <a class="header" [routerLink]="['/profile/'+team.author_key]"><b *ngIf="user.displayName">{{ user.displayName }} | </b>{{ team.author_name }}</a>
+            <div class="description">
+              <p>{{ user.bio }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

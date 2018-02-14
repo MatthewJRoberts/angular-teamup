@@ -1,0 +1,21 @@
+<div class="ui segment">
+  <div *ngIf="!requests" class="ui active inverted dimmer">
+    <div class="ui text loader">Loading...</div>
+  </div>
+  <h3 style="text-align: center;">Your Requests</h3>
+  <ul class="requests">
+
+    <li *ngIf="!requests">
+      <div class="ui segment">
+        Thank you for waiting...
+      </div>
+    </li>
+
+    <li *ngFor="let req of requests">
+      <div class="ui segment">
+        <b>Pending</b> | {{ req.team_name }} - {{ req.role }}
+      </div>
+    </li>
+
+  </ul>
+</div>

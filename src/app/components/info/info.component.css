@@ -1,0 +1,24 @@
+ul.skills {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+ul.skills li {
+    display: inline-block;
+    padding: 0.25em 0.5em;
+    margin: 0.25em;
+    text-transform: uppercase;
+    background-color: #ecf0f3;
+    cursor: pointer;
+    border-radius: 3px;
+}
+ul.skills li:hover {
+    background-color: #d5dee4;    
+}
+
+.name {
+    margin-bottom: 0;
+}
+.email {
+    margin-top: 0;
+}

@@ -1,0 +1,135 @@
+<a routerLink="/"><i class="arrow left icon"></i> Back to home</a>
+<form novalidate #f="ngForm" (ngSubmit)="onSubmit(f)" style="margin-top: 2em;">
+  <div class="ui form">
+    <div class="field" 
+      [ngClass]="{ 'error': ( teamName.errors?.required || teamName.errors?.minlength || teamName.errors?.maxlength ) && teamName.touched }"
+    >
+      <label>Team Name</label>
+      <input type="text" placeholder="Enter Team Name"
+        [(ngModel)]="team.name"
+        name="name"
+        #teamName="ngModel"
+        minlength="3"
+        maxlength="20"
+        required
+        autocomplete="off"
+      >
+      <div class="ui message negative" *ngIf="teamName.errors?.required && teamName.touched">
+        Team name is required.
+      </div>
+      <div class="ui message negative" *ngIf="teamName.errors?.minlength && teamName.touched">
+        Team name must be at least 3 characters.
+      </div>
+      <div class="ui message negative" *ngIf="teamName.errors?.maxlength && teamName.touched">
+        Team name must be less than 20 characters.
+      </div>
+    </div>
+    <div class="field"
+      [ngClass]="{ 'error': ( teamDesc.errors?.required || teamDesc.errors?.minlength || teamDesc.errors?.maxlength ) && teamDesc.touched }"
+    >
+      <label>Team Description</label>
+      <textarea rows="4" placeholder="Describe your team's goals..."
+        [(ngModel)]="team.desc"
+        name="desc"
+        #teamDesc="ngModel"
+        minlength="25"
+        maxlength="250"
+        required
+        autocomplete="off"
+      ></textarea>
+      <div class="ui message negative" *ngIf="teamDesc.errors?.required && teamDesc.touched">
+        Team description is required.
+      </div>
+      <div class="ui message negative" *ngIf="teamDesc.errors?.minlength && teamDesc.touched">
+        Team description must have 25 characters.
+      </div>
+      <div class="ui message negative" *ngIf="teamDesc.errors?.maxlength && teamDesc.touched">
+          Team description must be less than 250 characters.
+        </div>
+    </div>
+
+    <div class="ui divided items">
+      <div class="item">
+        <a (click)="onClickAddRole()"><i class="plus icon"></i> Add New Role</a>
+      </div>
+      <div *ngIf="team.roles?.length > 0;else noRoles">
+
+        <div class="item five fields" *ngFor="let role of team.roles; let index = index; trackBy: trackRole">
+          <div class="field">
+            <label>Role Name</label>
+            <input type="text" placeholder="Enter Role Name"
+              [(ngModel)]="team.roles[index].role_name"
+              name="role_name"
+              #roleName="ngModel"
+              autocomplete="off"
+              minlength="2"
+              maxlength="25"
+              required
+            >
+            <div class="ui message negative" *ngIf="roleName.errors?.required && roleName.touched">
+              Role Name is required.
+            </div>
+            <div class="ui message negative" *ngIf="roleName.errors?.minlength && roleName.touched">
+              Role Name must be at least 2 chracters long.
+            </div>
+            <div class="ui message negative" *ngIf="roleName.errors?.maxlength && roleName.touched">
+              Role Name must NOT be longer than 25 chracters.
+            </div>
+          </div>
+          <div class="field">
+            <label>Role Description</label>
+            <input type="text" placeholder="Keep it short       |       What skills are required?"
+              [(ngModel)]="team.roles[index].role_desc"
+              name="role_desc"
+              #roleDesc="ngModel"
+              autocomplete="off"
+              required
+              minlength="2"
+              maxlength="50"
+            >
+            <div class="ui message negative" *ngIf="roleDesc.errors?.required && roleDesc.touched">
+              Role Description is required.
+            </div>
+            <div class="ui message negative" *ngIf="roleDesc.errors?.minlength && roleDesc.touched">
+              Role Description must be at least 2 chracters long.
+            </div>
+            <div class="ui message negative" *ngIf="roleDesc.errors?.maxlength && roleDesc.touched">
+              Role Description must NOT be longer than 50 chracters.
+            </div>
+          </div>
+          <div class="field">
+            <label>Role Color</label>
+            <select [(ngModel)]="team.roles[index].role_color" name="role_color" [ngClass]="team.roles[index].role_color">
+              <option value="">Default</option>
+              <option value="blue">Blue</option>
+              <option value="red">Red</option>
+              <option value="green">Green</option>
+              <option value="orange">Orange</option>
+              <option value="purple">Purple</option>
+              <option value="black">Black</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>NOT Available</label>
+            <input type="checkbox" [(ngModel)]="team.roles[index].role_available" name="role_available">
+          </div>
+          <div class="field">
+            <label>Actions</label>
+            <a class="ui button negative" (click)="onClickRemoveRole(index)"><i class="remove icon"></i> Delete Role</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    
+
+    <div class="field">
+      <button type="submit" class="ui button primary">Create Team</button>
+      <button type="reset" class="ui button basic">Reset</button>
+    </div>
+  </div>
+</form>
+
+<ng-template #noRoles>
+  <h4>No Roles Added</h4>
+</ng-template>

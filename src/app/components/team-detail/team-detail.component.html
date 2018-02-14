@@ -1,0 +1,101 @@
+<div style="padding: 0em 0.5em;">
+  <a routerLink="/"><i class="arrow left icon"></i> Back to home</a>
+  <br><br>
+  <a class="ui button tiny" [routerLink]="['/team-edit/'+id]">Edit</a>
+  <br><br>
+</div>
+
+<app-author [id]="authorId"></app-author>
+
+<div class="ui two column stackable grid container">
+
+  <div class="column" style="padding: 1em 0.5em;">
+    <div class="ui segment">
+      <h3>{{ team.name }}</h3>
+      <p>{{ team.desc }}</p>
+    </div>
+  </div>
+
+  <div class="column" style="padding: 1em 0.5em;">
+    <div class="ui segment">
+      <h4>Available Roles</h4>
+      <ul class="ui list">
+        <div *ngFor="let role of team.roles">
+          <li *ngIf="!role.role_available" style="margin-bottom: 0.5em;">
+            {{ role.role_name }}
+            <b> - {{ role.role_desc }}</b>
+          </li>
+        </div>
+      </ul>
+      <h4>Unavailable Roles</h4>
+      <ul class="ui list">
+        <div *ngFor="let role of team.roles">
+          <li *ngIf="role.role_available" style="margin-bottom: 0.5em;">
+            {{ role.role_name }}
+            <b> - {{ role.role_desc }}</b>
+          </li>
+        </div>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<div class="ui one column stackable grid container">
+    
+  <div class="column" style="padding: 1em 0.5em;">
+    
+    <div class="ui segment">
+      <div class="ui items">
+        <div class="item" *ngIf="!mailSent; else hasSent">
+          <div class="content" *ngIf="isLoggedIn;else noAuth">
+            <p class="header">Get In Touch!</p>
+            <div class="description">
+              <form class="ui form" #f="ngForm" (ngSubmit)="onSubmit(f)">
+                <div class="field">
+                  <label>Role Choice</label>
+                  <select [(ngModel)]="mail.role" name="role" #role="ngModel">
+                    <option *ngFor="let role of team.roles" [value]="role.role_name">{{ role.role_name }}<b *ngIf="role.role_available"> - UNAVAILABLE</b></option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label>Message Body</label>
+                  <textarea rows="3" placeholder="What are your skills?      |      Keep it concise."
+                    [(ngModel)]="mail.message"
+                    name="message" 
+                    #message="ngModel"></textarea>
+                </div>
+                <div class="field">
+                  <button class="ui button blue" type="submit">Send Message</button>
+                  <button class="ui button basic" type="reset">Reset</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="ui modal">
+  <div class="header">Delete Team</div>
+  <div class="content">
+    <p>Are you sure you want to delete this team?</p>
+  </div>
+  <div class="actions">
+    <div class="ui cancel button">Cancel</div>
+    <div class="ui positive button">Delete</div>
+  </div>
+</div>
+
+<ng-template #noAuth>
+  <h4>You must be <a routerLink="/login">logged in</a> to send a message.</h4>
+</ng-template>
+
+<ng-template #hasSent>
+    <h3>Thank you, </h3>
+    <h4>Your message has been sent...</h4>
+</ng-template>

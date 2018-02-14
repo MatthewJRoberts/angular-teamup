@@ -1,0 +1,41 @@
+<div class="ui grid">
+  <div class="column">
+
+    <app-info></app-info>
+
+  </div>
+</div>
+
+<div class="ui grid">
+  <div class="six wide column">
+
+    <app-requests *ngIf="isProfile"></app-requests>
+
+  </div>
+  <div class="ten wide column">
+
+    <app-inbox *ngIf="isProfile"></app-inbox>
+    
+  </div>
+</div>
+
+<div class="ui grid">
+  <div class="column">
+
+    <app-skillset *ngIf="isProfile"></app-skillset>
+
+  </div>
+</div>
+
+<div class="ui grid">
+  <div class="ten wide column">
+
+      <app-settings *ngIf="isProfile"></app-settings>
+
+  </div>
+  <div class="six wide column">
+
+    <app-myteams></app-myteams>
+
+  </div>
+</div>

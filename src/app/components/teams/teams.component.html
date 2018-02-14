@@ -1,0 +1,25 @@
+
+<div class="ui cards" *ngIf="teams?.length > 0;else noTeams"> 
+  <div class="card" *ngFor="let team of teams" [routerLink]="['/team-detail/'+team.key]" style="cursor: pointer;">
+    <div class="content">
+      <div class="header">
+        {{ team.name }}
+      </div>
+      <div class="meta">
+        {{ team.author_name }}
+      </div>
+      <div class="description">
+        {{ team.desc | limitTo:130 }}
+      </div>
+    </div>
+    <div class="extra content">
+      <div style="margin: 0.25em;" class="ui basic button" *ngFor="let role of team.roles" [ngClass]="role.role_color">{{ role.role_name }}</div>
+    </div>
+  </div>
+</div>
+
+<ng-template #noTeams>
+  <h4>
+    No Teams Available
+  </h4>
+</ng-template>

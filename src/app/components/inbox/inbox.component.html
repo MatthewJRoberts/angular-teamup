@@ -1,0 +1,51 @@
+<div class="ui segment">
+  <div *ngIf="!mails" class="ui active inverted dimmer">
+    <div class="ui text loader">Loading...</div>
+  </div>
+  <h3 style="text-align: center;">Your Inbox</h3>
+  <ul class="inbox">
+    <li *ngIf="!mails" >
+      <div class="ui segment">
+        Thank you for waiting...
+      </div>
+    </li>
+
+    <li *ngIf="!showMail">
+      <div class="ui segment">
+        You have no mail...
+      </div>
+    </li>
+
+    <li *ngFor="let mail of showMail">
+      <div class="ui segment">
+        <h3 style="margin-bottom: 0;">{{ mail.role }} | {{ mail.team_name }}</h3>
+        <h4 style="margin-top: 0;">{{ mail.fromEmail }}</h4>
+        <p>{{ mail.message }}</p>
+
+        <a class="ui button positive" (click)="onClickAcceptRequest(mail)">Accept</a>
+        <a class="ui button negative" (click)="onClickDeclineRequest(mail)">Decline</a>
+        <a class="ui button" [routerLink]="['/profile/'+mail.from]">View Profile</a>
+
+      </div>
+    </li>
+
+    <li>
+      <div class="ui segment">
+
+        <a class="ui compact icon button" (click)="editPageCount('dec')">
+          <i class="angle left icon"></i>
+        </a>
+
+        <a class="ui compact icon button" *ngFor="let c of pageCountArr" (click)="editPageCount('set', c)" [ngClass]="{'active': currentPage == c}">
+          {{ c }}
+        </a>
+
+        <a class="ui compact icon button" (click)="editPageCount('inc')">
+          <i class="angle right icon"></i>
+        </a>
+
+      </div>
+    </li>
+
+  </ul>
+</div>

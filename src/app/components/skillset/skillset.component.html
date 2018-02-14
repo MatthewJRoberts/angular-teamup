@@ -1,0 +1,25 @@
+<div class="ui segment">
+  
+  <div class="ui massive form skill">
+    <div class="field">
+      <input placeholder="Add Skill & Knowledge" type="text" [(ngModel)]="query" (keydown)="onChangeInput()">
+    </div>
+
+    <div style="padding: 0 0.5em">
+      <div class="field">
+        <div class="ui button tag" *ngFor="let skill of showSkills" (click)="onClickSkill(skill.name)">{{ skill.name }}</div>
+      </div>
+      <div class="field">
+        <h4>Your Skills / Knowledge</h4>
+        <div class="ui button basic tag" *ngFor="let skill of hasSkills" (click)="onClickSkillDelete(skill)">{{ skill }}</div>
+      </div>
+      <div class="field">
+        <div class="ui blue deny right labeled icon button" (click)="onClickSkillSave()">
+          Save Changes
+          <i class="checkmark icon"></i>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
